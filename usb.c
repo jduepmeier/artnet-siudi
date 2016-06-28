@@ -153,14 +153,18 @@ void deinit_ctx(CONFIG* config) {
 
 bool find_usb_device(CONFIG* config) {
 	const uint16_t idVendor = 0x6244;
-	const uint16_t idProduct = 0x0441;
-
+	const uint16_t idProduct9A = 0x0441;
+	const uint16_t idProduct8A = 0x0421;
 	if (!config->ctx) {
 		fprintf(stderr, "libusb is not initialized.\n");
 		return false;
 	}
 
-	config->device = libusb_open_device_with_vid_pid(config->ctx, idVendor, idProduct);
+	config->device = libusb_open_device_with_vid_pid(config->ctx, idVendor, idProduct9A);
+
+	if (!config->device) {
+		config->device = libusb_open_device_with_vid_pid(config->ctx, idVendor, idProduct8A);
+	}
 
 	if (!config->device) {
 		fprintf(stderr, "cannot find device.\n");

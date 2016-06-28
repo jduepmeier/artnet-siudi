@@ -1,7 +1,7 @@
 #include "art-node.h"
 
 int usage(char* fn){
-	printf("xlaser - Whatever\n");
+	printf("%s - Artnet to usb.\n", fn);
 	printf("Usage:\n");
 	printf("\t%s <path to config file>", fn);
 	return EXIT_FAILURE;
@@ -52,22 +52,24 @@ int parse_config(CONFIG* config, char* filepath) {
 	return 0;
 }
 
+void interrupt_handler() {
+	printf("Quitting...\n");
+	abort_signaled = 1;
+}
+
 int main(int argc, char** argv){
 	if(argc < 2){
 		exit(usage(argv[0]));
 	}
 
 	CONFIG config = {
-		.bindhost = "*"
+		.bindhost = strdup("*")
 	};
 
-	config.bindhost = malloc(2);
-	config.bindhost[0] = '*';
-	config.bindhost[1] = 0;
-
 	parse_config(&config, argv[1]);
-	//TODO sanity check config
-	//TODO set up signal handlers
+
+	signal(SIGINT, interrupt_handler);
+	signal(SIGTERM, interrupt_handler);
 
 	//open artnet listener
 	config.sockfd = udp_listener(config.bindhost, "6454");
