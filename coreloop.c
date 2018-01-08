@@ -1,3 +1,10 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/select.h>
+
+#include "art-node.h"
+#include "artnet.h"
+
 int art_node(CONFIG* config){
 	fd_set readfds;
 	struct timeval tv;

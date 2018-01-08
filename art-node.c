@@ -1,4 +1,14 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "easy_config.h"
 #include "art-node.h"
+#include "network.h"
+#include "usb.h"
+#include "coreloop.h"
+
+volatile sig_atomic_t abort_signaled = 0;
 
 int usage(char* fn){
 	printf("%s - Artnet to usb.\n", fn);

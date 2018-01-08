@@ -1,4 +1,6 @@
 #pragma once
+#include <inttypes.h>
+#include "art-node.h"
 
 typedef enum ART_OPCODE {
 	ART_OP_POLL = 0x2000, /* This is an ArtPoll Packet, no other data is contained in this UDP packet.*/
@@ -11,11 +13,6 @@ typedef enum ART_OPCODE {
 	ART_OP_ADDRESS = 0x600, /* This is an ArtAddress packet. It contains remote programming information for a Node.*/
 	ART_OP_INPUT = 0x7000 /* This is an ArtInput packet. It contains enable - disable data for DMX inputs.*/
 } ART_OPCODE;
-
-const uint16_t ART_NET_PORT = 0x1936; /* 6454*/
-const uint8_t ART_ID[] = {'A', 'r', 't', '-', 'N', 'e', 't', 0x00};
-const uint8_t PROT_VER_HI = 0;
-const uint8_t PROT_VER_LO = 14;
 
 /* Talk to me bit maski (page 14) */
 typedef enum TALK_TO_ME {

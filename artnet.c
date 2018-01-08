@@ -1,7 +1,18 @@
-#include "artnet.h"
+#include <stdio.h>
+#include <string.h>
+#include <inttypes.h>
+
 #include <sys/types.h>
 #include <sys/socket.h>
-#include "endian.h"
+#include <endian.h>
+#include "artnet.h"
+#include "art-node.h"
+#include "usb.h"
+
+const uint16_t ART_NET_PORT = 0x1936;
+const uint8_t ART_ID[] = {'A', 'r', 't', '-', 'N', 'e', 't', 0x00};
+const uint8_t PROT_VER_HI = 0;
+const uint8_t PROT_VER_LO = 14;
 
 ArtNetPacket create_artnet_packet(ART_OPCODE op) {
 

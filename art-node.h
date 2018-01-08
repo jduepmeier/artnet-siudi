@@ -1,16 +1,9 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdint.h>
+#pragma once
+
+#include <inttypes.h>
 #include <signal.h>
-//#include <unistd.h>
-//#include <fcntl.h>
-//#include <ctype.h>
-//#include <math.h>
-//#include <errno.h>
 
-
-volatile sig_atomic_t abort_signaled = 0;
+extern volatile sig_atomic_t abort_signaled;;
 
 #define DMX_CHANNELS 16
 typedef struct /*XLASER_CFG*/ {
@@ -21,22 +14,3 @@ typedef struct /*XLASER_CFG*/ {
 	char* bindhost;
 	int sockfd;
 } CONFIG;
-
-
-// CHANNELS
-// X 16bit
-// Y 16bit
-// R G B 24bit
-// Dimmer
-// Shutter
-// Gobo
-// Focus
-// Rotation Abs
-// Rotation Speed
-#include "easy_config.h"
-#include "easy_config.c"
-#include "network.h"
-#include "usb.c"
-#include "artnet.h"
-#include "artnet.c"
-#include "coreloop.c"

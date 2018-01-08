@@ -1,7 +1,10 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 #include <libusb-1.0/libusb.h>
+
+#include "art-node.h"
 
 bool setup_device(libusb_device_handle* handle, unsigned universe) {
 
